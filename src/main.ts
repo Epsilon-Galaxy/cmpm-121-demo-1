@@ -8,7 +8,6 @@ const gameName = "Boulder Pusher";
 document.title = gameName;
 
 
-
 const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
@@ -24,7 +23,12 @@ const div = document.createElement("dive");
 div.innerHTML = counter.toString();
 app.append(div);
 
+const intervalID = setInterval(pushBoulder, 1000);
+console.log(intervalID);
+
+
+
 function pushBoulder(){
-    counter++;
+    counter++; 
     div.innerHTML = counter.toString();
 }
