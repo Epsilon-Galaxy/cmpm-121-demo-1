@@ -18,15 +18,15 @@ button.innerHTML = "🪨";
 app.append(button);
 
 const upgrade_1 = document.createElement("button");
-upgrade_1.innerHTML = "Buy a Sisyphus: " + 0;
+upgrade_1.innerHTML = "🫸Buy a Boulder Pusher: " + 0;
 app.append(upgrade_1);
 
 const upgrade_2 = document.createElement("button");
-upgrade_2.innerHTML = "Buy a boulder pusher 2: " + 0;
+upgrade_2.innerHTML = "🫸Buy a Pushing Machine 5000: " + 0;
 app.append(upgrade_2);
 
 const upgrade_3 = document.createElement("button");
-upgrade_3.innerHTML = "Buy a boulder pusher 3: " + 0;
+upgrade_3.innerHTML = "🫸Buy a Sisyphus: " + 0;
 app.append(upgrade_3);
 
 upgrade_1.addEventListener("click", function () {
@@ -99,7 +99,7 @@ function buyUpgrade(upgrade: number) {
   switch (upgrade) {
     case 1:
 
-      upgrade_1.innerHTML = "Buy a Sisyphus: " + timesPurchaced1;
+      upgrade_1.innerHTML = "🫸Buy a Boulder Pusher: " + timesPurchaced1;
       counter -= 10 * (1.15 ** timesPurchaced1);
       timesPurchaced1 += 1;
       if (counter < 10 * (1.15 ** timesPurchaced1)) {
@@ -109,7 +109,7 @@ function buyUpgrade(upgrade: number) {
       break;
     case 2:
 
-      upgrade_2.innerHTML = "Buy a boulder pusher 2: " + timesPurchaced2;
+      upgrade_2.innerHTML = "🫸Buy a Pushing Machine 5000: " + timesPurchaced2;
       counter -= 100 * (1.15 ** timesPurchaced2);
       timesPurchaced2 += 1;
       if(counter < 100 * (1.15 ** timesPurchaced2)){
@@ -119,7 +119,7 @@ function buyUpgrade(upgrade: number) {
       break;
     case 3:
 
-      upgrade_3.innerHTML = "Buy a boulder pusher 3: " + timesPurchaced3;
+      upgrade_3.innerHTML = "🫸Buy a Sisyphus: " + timesPurchaced3;
       counter -= 1000 * (1.15 ** timesPurchaced3);
       timesPurchaced3 += 1;
       if(counter < 1000 * (1.15 ** timesPurchaced3)){
