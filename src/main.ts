@@ -40,7 +40,7 @@ upgrade_2.addEventListener("click", function() {
 upgrade_2.disabled = true;
 
 upgrade_3.addEventListener("click", function() {
-  buyUpgrade(2);
+  buyUpgrade(3);
 })
 upgrade_3.disabled = true;
 
@@ -74,13 +74,13 @@ function incrementBoulder() {
   pushBoulder(growthRate * (timeElapsed / 1000));
   growthNum.innerHTML = "Miles Pushed Per Second: " + growthRate.toFixed(1).toString();
 
-  if (counter >= 10) {
+  if (counter >= 10 * (1.15 ** timesPurchaced1)) {
     upgrade_1.disabled = false;
   }
-  if (counter >= 100) {
+  if (counter >= 100 * (1.15 ** timesPurchaced2)) {
     upgrade_2.disabled = false;
   }
-  if (counter >= 1000) {
+  if (counter >= 1000 * (1.15 ** timesPurchaced3)) {
     upgrade_3.disabled = false;
   }
 
@@ -98,28 +98,31 @@ function pushBoulder(increment: number) {
 function buyUpgrade(upgrade: number) {
   switch (upgrade) {
     case 1:
-      timesPurchaced1 += 1;
+
       upgrade_1.innerHTML = "Buy a Sisyphus: " + timesPurchaced1;
-      counter -= 10;
-      if (counter < 10) {
+      counter -= 10 * (1.15 ** timesPurchaced1);
+      timesPurchaced1 += 1;
+      if (counter < 10 * (1.15 ** timesPurchaced1)) {
         upgrade_1.disabled = true;
       }
       growthRate += 0.1;
       break;
     case 2:
-      timesPurchaced2 += 1;
+
       upgrade_2.innerHTML = "Buy a boulder pusher 2: " + timesPurchaced2;
-      counter -= 100;
-      if(counter < 100){
+      counter -= 100 * (1.15 ** timesPurchaced2);
+      timesPurchaced2 += 1;
+      if(counter < 100 * (1.15 ** timesPurchaced2)){
         upgrade_2.disabled = true;
       }
       growthRate += 2;
       break;
     case 3:
-      timesPurchaced3 += 1;
+
       upgrade_3.innerHTML = "Buy a boulder pusher 3: " + timesPurchaced3;
-      counter -= 1000;
-      if(counter < 1000){
+      counter -= 1000 * (1.15 ** timesPurchaced3);
+      timesPurchaced3 += 1;
+      if(counter < 1000 * (1.15 ** timesPurchaced3)){
         upgrade_3.disabled = true;
       }
       growthRate += 50;
