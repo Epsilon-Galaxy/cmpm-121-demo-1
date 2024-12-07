@@ -1,21 +1,45 @@
 import "./style.css";
 
-
 interface Item {
-  name: string,
-  cost: number,
-  rate: number,
-  description: string,
-};
+  name: string;
+  cost: number;
+  rate: number;
+  description: string;
+}
 
 const availableItems: Item[] = [
-  { name: "🫸Buy a Boulder Pusher: " + 0, cost: 10, rate: 0.1, description: "A simple human stuck pushing a boulder" },
-  { name: "🫸Buy a Pushing Machine 5000: " + 0, cost: 100, rate: 2, description: "A machine built for pushing boulders" },
-  { name: "🫸Buy a Sisyphus: " + 0, cost: 1000, rate: 50, description: "A man doomed to push a boulder for eternity" },
-  { name: "Buy an Atlas: " + 0, cost: 5000, rate: 100, description: "A titan doomed to hold the earth forever, but now pushing a boulder" },
-  { name: "Make the Boulder Lighter: " + 0, cost: 100000, rate: 10000, description: "Lighting the load" }
+  {
+    name: "🫸Buy a Boulder Pusher: " + 0,
+    cost: 10,
+    rate: 0.1,
+    description: "A simple human stuck pushing a boulder",
+  },
+  {
+    name: "🫸Buy a Pushing Machine 5000: " + 0,
+    cost: 100,
+    rate: 2,
+    description: "A machine built for pushing boulders",
+  },
+  {
+    name: "🫸Buy a Sisyphus: " + 0,
+    cost: 1000,
+    rate: 50,
+    description: "A man doomed to push a boulder for eternity",
+  },
+  {
+    name: "Buy an Atlas: " + 0,
+    cost: 5000,
+    rate: 100,
+    description:
+      "A titan doomed to hold the earth forever, but now pushing a boulder",
+  },
+  {
+    name: "Make the Boulder Lighter: " + 0,
+    cost: 100000,
+    rate: 10000,
+    description: "Lighting the load",
+  },
 ];
-
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -29,14 +53,12 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-
-
 //Button to click to push boulder
 const button = document.createElement("button");
 button.innerHTML = "🪨";
 app.append(button);
 
-const buttons: HTMLButtonElement[] = []
+const buttons: HTMLButtonElement[] = [];
 
 for (const item of availableItems) {
   const tempButton = document.createElement("button");
@@ -45,7 +67,7 @@ for (const item of availableItems) {
 
   tempButton.addEventListener("click", function () {
     buyUpgrade(availableItems.indexOf(item) + 1);
-  })
+  });
   tempButton.disabled = true;
   buttons.push(tempButton);
 }
@@ -121,7 +143,8 @@ function buyUpgrade(upgrade: number) {
       growthRate += 0.5;
       break;
     case 2:
-      buttons[1].innerHTML = "🫸Buy a Pushing Machine 5000: " + (timesPurchaced2 + 1);
+      buttons[1].innerHTML =
+        "🫸Buy a Pushing Machine 5000: " + (timesPurchaced2 + 1);
       counter -= 100 * 1.15 ** timesPurchaced2;
       timesPurchaced2 += 1;
       if (counter < 100 * 1.15 ** timesPurchaced2) {
@@ -148,7 +171,8 @@ function buyUpgrade(upgrade: number) {
       growthRate += 100;
       break;
     case 5:
-      buttons[4].innerHTML = "Make the Boulder Lighter: " + (timesPurchaced5 + 1);
+      buttons[4].innerHTML =
+        "Make the Boulder Lighter: " + (timesPurchaced5 + 1);
       counter -= 100000 * 1.15 ** timesPurchaced5;
       timesPurchaced5 += 1;
       if (counter < 100000 * 1.15 ** timesPurchaced5) {
