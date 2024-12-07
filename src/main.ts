@@ -8,12 +8,12 @@ interface Item {
   description: string,
 };
 
-const availableItems : Item[] = [
-  {name: "🫸Buy a Boulder Pusher: " + 0, cost: 10, rate: 0.1, description: "A simple human stuck pushing a boulder"},
-  {name: "🫸Buy a Pushing Machine 5000: " + 0, cost: 100, rate: 2, description: "A machine built for pushing boulders"},
-  {name: "🫸Buy a Sisyphus: " + 0, cost: 1000, rate: 50, description: "A man doomed to push a boulder for eternity"},
-  {name: "Buy an Atlas: " + 0, cost: 5000, rate: 100, description: "A titan doomed to hold the earth forever, but now pushing a boulder"},
-  {name: "Make the Boulder Lighter: " + 0, cost: 100000, rate: 10000, description: "Lighting the load"}
+const availableItems: Item[] = [
+  { name: "🫸Buy a Boulder Pusher: " + 0, cost: 10, rate: 0.1, description: "A simple human stuck pushing a boulder" },
+  { name: "🫸Buy a Pushing Machine 5000: " + 0, cost: 100, rate: 2, description: "A machine built for pushing boulders" },
+  { name: "🫸Buy a Sisyphus: " + 0, cost: 1000, rate: 50, description: "A man doomed to push a boulder for eternity" },
+  { name: "Buy an Atlas: " + 0, cost: 5000, rate: 100, description: "A titan doomed to hold the earth forever, but now pushing a boulder" },
+  { name: "Make the Boulder Lighter: " + 0, cost: 100000, rate: 10000, description: "Lighting the load" }
 ];
 
 
@@ -38,46 +38,17 @@ app.append(button);
 
 const buttons: HTMLButtonElement[] = []
 
-for(const item of availableItems){
+for (const item of availableItems) {
   const tempButton = document.createElement("button");
   tempButton.innerHTML = item.name;
   app.append(tempButton);
 
-  tempButton.addEventListener("click", function() {
+  tempButton.addEventListener("click", function () {
     buyUpgrade(availableItems.indexOf(item) + 1);
   })
   tempButton.disabled = true;
   buttons.push(tempButton);
 }
-/*
-const upgrade_1 = document.createElement("button");
-upgrade_1.innerHTML = "🫸Buy a Boulder Pusher: " + 0;
-app.append(upgrade_1);
-
-const upgrade_2 = document.createElement("button");
-upgrade_2.innerHTML = "🫸Buy a Pushing Machine 5000: " + 0;
-app.append(upgrade_2);
-
-const upgrade_3 = document.createElement("button");
-upgrade_3.innerHTML = "🫸Buy a Sisyphus: " + 0;
-app.append(upgrade_3);
-
-
-upgrade_1.addEventListener("click", function () {
-  buyUpgrade(1);
-});
-upgrade_1.disabled = true;
-
-upgrade_2.addEventListener("click", function () {
-  buyUpgrade(2);
-});
-upgrade_2.disabled = true;
-
-upgrade_3.addEventListener("click", function () {
-  buyUpgrade(3);
-});
-upgrade_3.disabled = true;
-*/
 
 //On button click perform push Boulder
 button.addEventListener("click", function () {
@@ -147,7 +118,7 @@ function buyUpgrade(upgrade: number) {
       if (counter < 10 * 1.15 ** timesPurchaced1) {
         buttons[0].disabled = true;
       }
-      growthRate += 1000.1;
+      growthRate += 0.5;
       break;
     case 2:
       buttons[1].innerHTML = "🫸Buy a Pushing Machine 5000: " + (timesPurchaced2 + 1);
