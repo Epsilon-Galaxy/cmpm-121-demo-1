@@ -7,39 +7,17 @@ interface Item {
   description: string;
 }
 
-const availableItems: Item[] = [
-  {
-    name: "🫸Buy a Boulder Pusher: " + 0,
-    cost: 10,
-    rate: 0.1,
-    description: "A simple human stuck pushing a boulder",
-  },
-  {
-    name: "🫸Buy a Pushing Machine 5000: " + 0,
-    cost: 100,
-    rate: 2,
-    description: "A machine built for pushing boulders",
-  },
-  {
-    name: "🫸Buy a Sisyphus: " + 0,
-    cost: 1000,
-    rate: 50,
-    description: "A man doomed to push a boulder for eternity",
-  },
-  {
-    name: "Buy an Atlas: " + 0,
-    cost: 5000,
-    rate: 100,
-    description:
-      "A titan doomed to hold the earth forever, but now pushing a boulder",
-  },
-  {
-    name: "Make the Boulder Lighter: " + 0,
-    cost: 100000,
-    rate: 10000,
-    description: "Lighting the load",
-  },
-];
+const availableItems: Item[] = [];
+
+function createNewItem(name: string, cost: number, rate: number, description: string){
+  availableItems.push({name: name, cost: cost, rate: rate, description: description})
+}
+
+createNewItem("🫸Buy a Boulder Pusher: " + 0, 10, 0.1, "A simple human stuck pushing a boulder");
+createNewItem("🫸Buy a Pushing Machine 5000: " + 0, 100, 2, "A machine built for pushing boulders");
+createNewItem("🫸Buy a Sisyphus: " + 0, 1000, 50, "A man doomed to push a boulder for eternity");
+createNewItem("🫸Buy an Atlas: " + 0, 5000, 100, "A titan doomed to hold the earth forever, but now pushing a boulder");
+createNewItem("Make the Boulder Lighter: " + 0, 100000, 10000, "Lightening the Load");
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -129,55 +107,33 @@ function pushBoulder(increment: number) {
   div.innerHTML = Math.trunc(counter).toString();
 }
 
-function buyUpgrade(upgrade: number) {
-  switch (upgrade) {
-    case 1:
-      buttons[0].innerHTML =
-        "🫸Buy a Boulder Pusher: " + (timesPurchased[0] + 1);
-      counter -= 10 * 1.15 ** timesPurchased[0];
-      timesPurchased[0] += 1;
-      if (counter < 10 * 1.15 ** timesPurchased[0]) {
-        buttons[0].disabled = true;
-      }
-      growthRate += 0.5;
-      break;
-    case 2:
-      buttons[1].innerHTML =
-        "🫸Buy a Pushing Machine 5000: " + (timesPurchased[1] + 1);
-      counter -= 100 * 1.15 ** timesPurchased[1];
-      timesPurchased[1] += 1;
-      if (counter < 100 * 1.15 ** timesPurchased[1]) {
-        buttons[1].disabled = true;
-      }
-      growthRate += 2;
-      break;
-    case 3:
-      buttons[2].innerHTML = "🫸Buy a Sisyphus: " + (timesPurchased[2] + 1);
-      counter -= 1000 * 1.15 ** timesPurchased[2];
-      timesPurchased[2] += 1;
-      if (counter < 1000 * 1.15 ** timesPurchased[2]) {
-        buttons[2].disabled = true;
-      }
-      growthRate += 50;
-      break;
-    case 4:
-      buttons[3].innerHTML = "Buy an Atlas: " + (timesPurchased[3] + 1);
-      counter -= 5000 * 1.15 ** timesPurchased[3];
-      timesPurchased[3] += 1;
-      if (counter < 5000 * 1.15 ** timesPurchased[3]) {
-        buttons[3].disabled = true;
-      }
-      growthRate += 100;
-      break;
-    case 5:
-      buttons[4].innerHTML =
-        "Make the Boulder Lighter: " + (timesPurchased[4] + 1);
-      counter -= 100000 * 1.15 ** timesPurchased[4];
-      timesPurchased[4] += 1;
-      if (counter < 100000 * 1.15 ** timesPurchased[4]) {
-        buttons[4].disabled = true;
-      }
-      growthRate += 10000;
-      break;
-  }
+function updateButtonText(buttonIndex: number, timesPurchased: number){
+  buttons[buttonIndex].innerHTML = buttons[buttonIndex].innerHTML.split(":")[0] + ": " + (timesPurchased + 1);
 }
+
+function deductCost(buttonIndex: number, timesPurchased: number): number {
+  const costs = [10, 100, 1000, 5000, 100000];
+  return costs[buttonIndex] * 1.15 ** timesPurchased;
+}
+
+function updateGrowthRate(upgradeIndex: number): number{
+  const growthRates = [0.1, 2, 50, 100, 10000];
+  return growthRates[upgradeIndex];
+}
+
+function buyUpgrade(upgrade: number){
+  const buttonIndex = upgrade -1;
+  const cost = deductCost(buttonIndex, timesPurchased[buttonIndex]);
+
+  if (counter >= cost) {
+    updateButtonText(buttonIndex, timesPurchased[buttonIndex]);
+    counter -= cost;
+    timesPurchased[buttonIndex] += 1;
+    growthRate += updateGrowthRate(buttonIndex);
+
+    if (counter < cost) {
+        buttons[buttonIndex].disabled = true; // Disable button if not enough counter
+    }
+}
+}
+
