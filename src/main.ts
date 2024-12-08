@@ -9,15 +9,50 @@ interface Item {
 
 const availableItems: Item[] = [];
 
-function createNewItem(name: string, cost: number, rate: number, description: string){
-  availableItems.push({name: name, cost: cost, rate: rate, description: description})
+function createNewItem(
+  name: string,
+  cost: number,
+  rate: number,
+  description: string,
+) {
+  availableItems.push({
+    name: name,
+    cost: cost,
+    rate: rate,
+    description: description,
+  });
 }
 
-createNewItem("🫸Buy a Boulder Pusher: " + 0, 10, 0.1, "A simple human stuck pushing a boulder");
-createNewItem("🫸Buy a Pushing Machine 5000: " + 0, 100, 2, "A machine built for pushing boulders");
-createNewItem("🫸Buy a Sisyphus: " + 0, 1000, 50, "A man doomed to push a boulder for eternity");
-createNewItem("🫸Buy an Atlas: " + 0, 5000, 100, "A titan doomed to hold the earth forever, but now pushing a boulder");
-createNewItem("Make the Boulder Lighter: " + 0, 100000, 10000, "Lightening the Load");
+createNewItem(
+  "🫸Buy a Boulder Pusher: " + 0,
+  10,
+  0.1,
+  "A simple human stuck pushing a boulder",
+);
+createNewItem(
+  "🫸Buy a Pushing Machine 5000: " + 0,
+  100,
+  2,
+  "A machine built for pushing boulders",
+);
+createNewItem(
+  "🫸Buy a Sisyphus: " + 0,
+  1000,
+  50,
+  "A man doomed to push a boulder for eternity",
+);
+createNewItem(
+  "🫸Buy an Atlas: " + 0,
+  5000,
+  100,
+  "A titan doomed to hold the earth forever, but now pushing a boulder",
+);
+createNewItem(
+  "Make the Boulder Lighter: " + 0,
+  100000,
+  10000,
+  "Lightening the Load",
+);
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -107,8 +142,9 @@ function pushBoulder(increment: number) {
   div.innerHTML = Math.trunc(counter).toString();
 }
 
-function updateButtonText(buttonIndex: number, timesPurchased: number){
-  buttons[buttonIndex].innerHTML = buttons[buttonIndex].innerHTML.split(":")[0] + ": " + (timesPurchased + 1);
+function updateButtonText(buttonIndex: number, timesPurchased: number) {
+  buttons[buttonIndex].innerHTML =
+    buttons[buttonIndex].innerHTML.split(":")[0] + ": " + (timesPurchased + 1);
 }
 
 function deductCost(buttonIndex: number, timesPurchased: number): number {
@@ -116,13 +152,13 @@ function deductCost(buttonIndex: number, timesPurchased: number): number {
   return costs[buttonIndex] * 1.15 ** timesPurchased;
 }
 
-function updateGrowthRate(upgradeIndex: number): number{
+function updateGrowthRate(upgradeIndex: number): number {
   const growthRates = [0.1, 2, 50, 100, 10000];
   return growthRates[upgradeIndex];
 }
 
-function buyUpgrade(upgrade: number){
-  const buttonIndex = upgrade -1;
+function buyUpgrade(upgrade: number) {
+  const buttonIndex = upgrade - 1;
   const cost = deductCost(buttonIndex, timesPurchased[buttonIndex]);
 
   if (counter >= cost) {
@@ -132,8 +168,7 @@ function buyUpgrade(upgrade: number){
     growthRate += updateGrowthRate(buttonIndex);
 
     if (counter < cost) {
-        buttons[buttonIndex].disabled = true; // Disable button if not enough counter
+      buttons[buttonIndex].disabled = true; // Disable button if not enough counter
     }
+  }
 }
-}
-
