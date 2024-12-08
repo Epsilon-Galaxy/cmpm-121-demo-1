@@ -24,25 +24,25 @@ function createNewItem(
 }
 
 createNewItem(
-  "🫸Buy a Boulder Pusher: " + 0,
+  "⛰️Buy a Boulder Pusher: " + 0,
   10,
   0.1,
   "A simple human stuck pushing a boulder",
 );
 createNewItem(
-  "🫸Buy a Pushing Machine 5000: " + 0,
+  "⛰️Buy a Pushing Machine 5000: " + 0,
   100,
   2,
   "A machine built for pushing boulders",
 );
 createNewItem(
-  "🫸Buy a Sisyphus: " + 0,
+  "⛰️Buy a Sisyphus: " + 0,
   1000,
   50,
   "A man doomed to push a boulder for eternity",
 );
 createNewItem(
-  "🫸Buy an Atlas: " + 0,
+  "⛰️Buy an Atlas: " + 0,
   5000,
   100,
   "A titan doomed to hold the earth forever, but now pushing a boulder",
@@ -68,15 +68,40 @@ app.append(header);
 
 //Button to click to push boulder
 const button = document.createElement("button");
-button.innerHTML = "🪨";
+button.innerHTML = "⛰️";
+button.style.fontSize = '70px';
+button.style.width = '300px';
+button.style.height = 'auto';
+button.style.position = 'absolute';
+button.style.top = '20px';
+button.style.left = '50%';
+button.style.transform = 'translateX(-50%)';
+button.style.cursor = 'pointer';
 app.append(button);
+
+
+const counterDiv= document.createElement("div");
+counterDiv.innerHTML = counter.toString();
+counterDiv.style.textAlign = 'center';
+counterDiv.style.marginTop = '30px';
+counterDiv.style.marginBottom = '10px';
+counterDiv.style.fontSize = '32px';
+app.append(counterDiv);
+
+const tempDiv = document.createElement("div");
+app.append(tempDiv);
 
 const buttons: HTMLButtonElement[] = [];
 
 for (const item of availableItems) {
+
   const tempButton = document.createElement("button");
   tempButton.innerHTML = item.name;
-  app.append(tempButton);
+  tempButton.style.padding = '40px 0px';
+  tempButton.style.font = '16px';
+  tempButton.style.cursor = 'pointer';
+  tempButton.style.width = '40%';
+  tempDiv.append(tempButton);
 
   tempButton.addEventListener("click", function () {
     buyUpgrade(availableItems.indexOf(item) + 1);
@@ -90,19 +115,19 @@ button.addEventListener("click", function () {
   pushBoulder(1);
 });
 
-const div = document.createElement("div");
-div.innerHTML = counter.toString();
-app.append(div);
 
 let zero: number = performance.now();
 let timeElapsed: number;
 
 const timesPurchased: number[] = [0, 0, 0, 0, 0];
 
-//Growth rate of boulder pushes 
+//Growth rate of boulder pushes
 let growthRate: number = 0;
 const growthNum = document.createElement("div");
 growthNum.innerHTML = growthRate.toString();
+growthNum.style.textAlign = 'center';
+growthNum.style.marginTop = '30px';
+growthNum.style.fontSize = '16px';
 app.append(growthNum);
 
 //increments boulder by growth rate
@@ -139,7 +164,7 @@ requestAnimationFrame(incrementBoulder);
 function pushBoulder(increment: number) {
   counter += increment;
 
-  div.innerHTML = Math.trunc(counter).toString();
+  counterDiv.innerHTML = Math.trunc(counter).toString();
 }
 
 function updateButtonText(buttonIndex: number, timesPurchased: number) {
