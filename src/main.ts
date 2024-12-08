@@ -84,11 +84,8 @@ app.append(div);
 let zero: number = performance.now();
 let timeElapsed: number;
 
-let timesPurchaced1: number = 0;
-let timesPurchaced2: number = 0;
-let timesPurchaced3: number = 0;
-let timesPurchaced4: number = 0;
-let timesPurchaced5: number = 0;
+
+const timesPurchased: number[] = [0, 0, 0, 0, 0];
 
 //Growth rate of boulder pushes
 let growthRate: number = 0;
@@ -104,23 +101,24 @@ function incrementBoulder() {
   growthNum.innerHTML =
     "Miles Pushed Per Second: " + growthRate.toFixed(1).toString();
 
-  if (counter >= 10 * 1.15 ** timesPurchaced1) {
-    buttons[0].disabled = false;
-  }
-  if (counter >= 100 * 1.15 ** timesPurchaced2) {
-    buttons[1].disabled = false;
-  }
-  if (counter >= 1000 * 1.15 ** timesPurchaced3) {
-    buttons[2].disabled = false;
-  }
-  if (counter >= 5000 * 1.15 ** timesPurchaced4) {
-    buttons[3].disabled = false;
-  }
-  if (counter >= 100000 * 1.15 ** timesPurchaced5) {
-    buttons[4].disabled = false;
-  }
+  updateButtonState();
 
   requestAnimationFrame(incrementBoulder);
+}
+
+function updateButtonState(){
+  for (let i = 0; i < buttons.length; i++){
+    buttons[i].disabled = counter < (fetchCost(i) * 1.15 ** fetchTimesPurchased(i));
+  }
+}
+
+function fetchCost(index: number): number{
+  const costs = [10, 100, 1000, 5000, 100000];
+  return costs[index];
+}
+
+function fetchTimesPurchased(index: number): number{
+  return timesPurchased[index];
 }
 
 requestAnimationFrame(incrementBoulder);
@@ -134,48 +132,48 @@ function pushBoulder(increment: number) {
 function buyUpgrade(upgrade: number) {
   switch (upgrade) {
     case 1:
-      buttons[0].innerHTML = "🫸Buy a Boulder Pusher: " + (timesPurchaced1 + 1);
-      counter -= 10 * 1.15 ** timesPurchaced1;
-      timesPurchaced1 += 1;
-      if (counter < 10 * 1.15 ** timesPurchaced1) {
+      buttons[0].innerHTML = "🫸Buy a Boulder Pusher: " + (timesPurchased[0] + 1);
+      counter -= 10 * 1.15 ** timesPurchased[0];
+      timesPurchased[0] += 1;
+      if (counter < 10 * 1.15 ** timesPurchased[0]) {
         buttons[0].disabled = true;
       }
       growthRate += 0.5;
       break;
     case 2:
       buttons[1].innerHTML =
-        "🫸Buy a Pushing Machine 5000: " + (timesPurchaced2 + 1);
-      counter -= 100 * 1.15 ** timesPurchaced2;
-      timesPurchaced2 += 1;
-      if (counter < 100 * 1.15 ** timesPurchaced2) {
+        "🫸Buy a Pushing Machine 5000: " + (timesPurchased[1] + 1);
+      counter -= 100 * 1.15 ** timesPurchased[1];
+      timesPurchased[1] += 1;
+      if (counter < 100 * 1.15 ** timesPurchased[1]) {
         buttons[1].disabled = true;
       }
       growthRate += 2;
       break;
     case 3:
-      buttons[2].innerHTML = "🫸Buy a Sisyphus: " + (timesPurchaced3 + 1);
-      counter -= 1000 * 1.15 ** timesPurchaced3;
-      timesPurchaced3 += 1;
-      if (counter < 1000 * 1.15 ** timesPurchaced3) {
+      buttons[2].innerHTML = "🫸Buy a Sisyphus: " + (timesPurchased[2] + 1);
+      counter -= 1000 * 1.15 ** timesPurchased[2];
+      timesPurchased[2] += 1;
+      if (counter < 1000 * 1.15 ** timesPurchased[2]) {
         buttons[2].disabled = true;
       }
       growthRate += 50;
       break;
     case 4:
-      buttons[3].innerHTML = "Buy an Atlas: " + (timesPurchaced4 + 1);
-      counter -= 5000 * 1.15 ** timesPurchaced4;
-      timesPurchaced4 += 1;
-      if (counter < 5000 * 1.15 ** timesPurchaced4) {
+      buttons[3].innerHTML = "Buy an Atlas: " + (timesPurchased[3] + 1);
+      counter -= 5000 * 1.15 ** timesPurchased[3];
+      timesPurchased[3] += 1;
+      if (counter < 5000 * 1.15 ** timesPurchased[3]) {
         buttons[3].disabled = true;
       }
       growthRate += 100;
       break;
     case 5:
       buttons[4].innerHTML =
-        "Make the Boulder Lighter: " + (timesPurchaced5 + 1);
-      counter -= 100000 * 1.15 ** timesPurchaced5;
-      timesPurchaced5 += 1;
-      if (counter < 100000 * 1.15 ** timesPurchaced5) {
+        "Make the Boulder Lighter: " + (timesPurchased[4] + 1);
+      counter -= 100000 * 1.15 ** timesPurchased[4];
+      timesPurchased[4] += 1;
+      if (counter < 100000 * 1.15 ** timesPurchased[4]) {
         buttons[4].disabled = true;
       }
       growthRate += 10000;
