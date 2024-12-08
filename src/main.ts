@@ -69,23 +69,22 @@ app.append(header);
 //Button to click to push boulder
 const button = document.createElement("button");
 button.innerHTML = "⛰️";
-button.style.fontSize = '70px';
-button.style.width = '300px';
-button.style.height = 'auto';
-button.style.position = 'absolute';
-button.style.top = '20px';
-button.style.left = '50%';
-button.style.transform = 'translateX(-50%)';
-button.style.cursor = 'pointer';
+button.style.fontSize = "70px";
+button.style.width = "300px";
+button.style.height = "auto";
+button.style.position = "absolute";
+button.style.top = "20px";
+button.style.left = "50%";
+button.style.transform = "translateX(-50%)";
+button.style.cursor = "pointer";
 app.append(button);
 
-
-const counterDiv= document.createElement("div");
+const counterDiv = document.createElement("div");
 counterDiv.innerHTML = counter.toString();
-counterDiv.style.textAlign = 'center';
-counterDiv.style.marginTop = '30px';
-counterDiv.style.marginBottom = '10px';
-counterDiv.style.fontSize = '32px';
+counterDiv.style.textAlign = "center";
+counterDiv.style.marginTop = "30px";
+counterDiv.style.marginBottom = "10px";
+counterDiv.style.fontSize = "32px";
 app.append(counterDiv);
 
 const tempDiv = document.createElement("div");
@@ -94,13 +93,12 @@ app.append(tempDiv);
 const buttons: HTMLButtonElement[] = [];
 
 for (const item of availableItems) {
-
   const tempButton = document.createElement("button");
   tempButton.innerHTML = item.name;
-  tempButton.style.padding = '40px 0px';
-  tempButton.style.font = '16px';
-  tempButton.style.cursor = 'pointer';
-  tempButton.style.width = '40%';
+  tempButton.style.padding = "40px 0px";
+  tempButton.style.font = "16px";
+  tempButton.style.cursor = "pointer";
+  tempButton.style.width = "40%";
   tempDiv.append(tempButton);
 
   tempButton.addEventListener("click", function () {
@@ -115,7 +113,6 @@ button.addEventListener("click", function () {
   pushBoulder(1);
 });
 
-
 let zero: number = performance.now();
 let timeElapsed: number;
 
@@ -125,9 +122,9 @@ const timesPurchased: number[] = [0, 0, 0, 0, 0];
 let growthRate: number = 0;
 const growthNum = document.createElement("div");
 growthNum.innerHTML = growthRate.toString();
-growthNum.style.textAlign = 'center';
-growthNum.style.marginTop = '30px';
-growthNum.style.fontSize = '16px';
+growthNum.style.textAlign = "center";
+growthNum.style.marginTop = "30px";
+growthNum.style.fontSize = "16px";
 app.append(growthNum);
 
 //increments boulder by growth rate
