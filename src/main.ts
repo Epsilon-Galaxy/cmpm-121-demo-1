@@ -84,7 +84,6 @@ app.append(div);
 let zero: number = performance.now();
 let timeElapsed: number;
 
-
 const timesPurchased: number[] = [0, 0, 0, 0, 0];
 
 //Growth rate of boulder pushes
@@ -106,18 +105,19 @@ function incrementBoulder() {
   requestAnimationFrame(incrementBoulder);
 }
 
-function updateButtonState(){
-  for (let i = 0; i < buttons.length; i++){
-    buttons[i].disabled = counter < (fetchCost(i) * 1.15 ** fetchTimesPurchased(i));
+function updateButtonState() {
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].disabled =
+      counter < fetchCost(i) * 1.15 ** fetchTimesPurchased(i);
   }
 }
 
-function fetchCost(index: number): number{
+function fetchCost(index: number): number {
   const costs = [10, 100, 1000, 5000, 100000];
   return costs[index];
 }
 
-function fetchTimesPurchased(index: number): number{
+function fetchTimesPurchased(index: number): number {
   return timesPurchased[index];
 }
 
@@ -132,7 +132,8 @@ function pushBoulder(increment: number) {
 function buyUpgrade(upgrade: number) {
   switch (upgrade) {
     case 1:
-      buttons[0].innerHTML = "🫸Buy a Boulder Pusher: " + (timesPurchased[0] + 1);
+      buttons[0].innerHTML =
+        "🫸Buy a Boulder Pusher: " + (timesPurchased[0] + 1);
       counter -= 10 * 1.15 ** timesPurchased[0];
       timesPurchased[0] += 1;
       if (counter < 10 * 1.15 ** timesPurchased[0]) {
