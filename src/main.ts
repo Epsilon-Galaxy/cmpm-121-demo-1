@@ -99,7 +99,7 @@ let timeElapsed: number;
 
 const timesPurchased: number[] = [0, 0, 0, 0, 0];
 
-//Growth rate of boulder pushes
+//Growth rate of boulder pushes 
 let growthRate: number = 0;
 const growthNum = document.createElement("div");
 growthNum.innerHTML = growthRate.toString();
